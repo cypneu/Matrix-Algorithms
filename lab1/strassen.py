@@ -23,11 +23,12 @@ def strassen_matmul(A: np.ndarray, B: np.ndarray) -> np.ndarray:
     P_6 = strassen_matmul(A_21 - A_11, B_11 + B_12)
     P_7 = strassen_matmul(A_12 - A_22, B_21 + B_22)
 
-    counter["+"] += 18 * n ** 2
-
     C_11 = P_1 + P_4 - P_5 + P_7
     C_12 = P_3 + P_5
     C_21 = P_2 + P_4
     C_22 = P_1 - P_2 + P_3 + P_6
+
+    counter["+"] += 12 * n ** 2
+    counter["-"] += 6 * n ** 2
 
     return np.block([[C_11, C_12], [C_21, C_22]])
